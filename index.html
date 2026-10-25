@@ -5,8 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>AI ADS - Premium AI Advertising Agency</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/react.min.js"></script>
-    <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/react-dom.min.js"></script>
+    <script crossorigin src="https://unpkg.com/scheduler@0.23.0/umd/scheduler.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react@18.2.0/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone@7.28.5/babel.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         :root {
@@ -244,6 +246,29 @@
 
         /* Mobile Optimization */
         @media (max-width: 768px) {
+            .brand-wordmark {
+                white-space: nowrap;
+            }
+
+            button.mobile-menu-toggle {
+                width: 44px !important;
+                min-width: 44px !important;
+                min-height: 44px;
+                padding: 8px !important;
+                flex: 0 0 44px;
+            }
+
+            button.whatsapp-floating {
+                width: 56px !important;
+                height: 56px !important;
+                min-width: 56px;
+                min-height: 56px;
+                padding: 0 !important;
+                right: 16px !important;
+                bottom: 16px !important;
+                border-radius: 50% !important;
+            }
+
             nav {
                 padding: 12px 16px;
             }
@@ -347,6 +372,7 @@
             const [selectedFilter, setSelectedFilter] = useState('all');
             const [formData, setFormData] = useState({ name: '', phone: '', email: '', project: '', website: '' });
             const [formStatus, setFormStatus] = useState('');
+            const [viewportWidth, setViewportWidth] = useState(window.innerWidth);
 
             useEffect(() => {
                 const handleScroll = () => {
@@ -354,6 +380,12 @@
                 };
                 window.addEventListener('scroll', handleScroll);
                 return () => window.removeEventListener('scroll', handleScroll);
+            }, []);
+
+            useEffect(() => {
+                const handleResize = () => setViewportWidth(window.innerWidth);
+                window.addEventListener('resize', handleResize);
+                return () => window.removeEventListener('resize', handleResize);
             }, []);
 
             const openWhatsApp = (message) => {
@@ -434,10 +466,10 @@
                     }}>
                         <div style={{ maxWidth: '1280px', margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                             <a href="/" aria-label="AI ADS home" style={{ display: 'inline-flex', alignItems: 'center', textDecoration: 'none' }}>
-                                <img src="/manus-storage/logo_b66763fe.jpeg" alt="" width={window.innerWidth > 768 ? 84 : 64} height={window.innerWidth > 768 ? 84 : 64} style={{ display: 'block', objectFit: 'contain' }} />
+                                <img src="/manus-storage/logo_b66763fe.jpeg" alt="" width={viewportWidth > 768 ? 84 : 64} height={viewportWidth > 768 ? 84 : 64} style={{ display: 'block', objectFit: 'contain' }} />
                             </a>
 
-                            <div style={{ display: 'none' }} className="nav-desktop" style={{ display: window.innerWidth > 768 ? 'flex' : 'none', gap: '48px', alignItems: 'center' }}>
+                            <div className="nav-desktop" style={{ display: viewportWidth > 768 ? 'flex' : 'none', gap: '48px', alignItems: 'center' }}>
                                 <a href="#services" style={{ fontSize: '14px', cursor: 'pointer', transition: 'color 0.3s' }} onMouseEnter={(e) => e.target.style.color = '#c084fc'} onMouseLeave={(e) => e.target.style.color = 'white'}>Services</a>
                                 <a href="#work" style={{ fontSize: '14px', cursor: 'pointer', transition: 'color 0.3s' }} onMouseEnter={(e) => e.target.style.color = '#c084fc'} onMouseLeave={(e) => e.target.style.color = 'white'}>Work</a>
                                 <a href="#process" style={{ fontSize: '14px', cursor: 'pointer', transition: 'color 0.3s' }} onMouseEnter={(e) => e.target.style.color = '#c084fc'} onMouseLeave={(e) => e.target.style.color = 'white'}>Process</a>
@@ -453,7 +485,8 @@
                             </div>
 
                             <button
-                                style={{ display: window.innerWidth > 768 ? 'none' : 'block', background: 'none', border: 'none', color: 'white', cursor: 'pointer', fontSize: '24px' }}
+                                className="mobile-menu-toggle"
+                                style={{ display: viewportWidth > 768 ? 'none' : 'block', background: 'none', border: 'none', color: 'white', cursor: 'pointer', fontSize: '24px' }}
                                 onClick={() => setIsMenuOpen(!isMenuOpen)}
                             >
                                 {isMenuOpen ? '✕' : '☰'}
@@ -481,11 +514,11 @@
 
                     {/* Hero Section */}
                     <section style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', paddingTop: '80px', position: 'relative', overflow: 'hidden', padding: '24px' }}>
-                        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(176, 176, 176, 0.2), transparent)', opacity: 0, transition: 'opacity 0.5s' }} onMouseEnter={(e) => e.style.opacity = '1'} onMouseLeave={(e) => e.style.opacity = '0'}></div>
+                        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(176, 176, 176, 0.2), transparent)', opacity: 0, transition: 'opacity 0.5s' }} onMouseEnter={(e) => e.currentTarget.style.opacity = '1'} onMouseLeave={(e) => e.currentTarget.style.opacity = '0'}></div>
 
-                        <div style={{ maxWidth: '1280px', margin: '0 auto', width: '100%', display: 'grid', gridTemplateColumns: window.innerWidth > 768 ? '1fr 1fr' : '1fr', gap: '48px', alignItems: 'center', position: 'relative', zIndex: 10 }}>
+                        <div style={{ maxWidth: '1280px', margin: '0 auto', width: '100%', display: 'grid', gridTemplateColumns: viewportWidth > 768 ? '1fr 1fr' : '1fr', gap: '48px', alignItems: 'center', position: 'relative', zIndex: 10 }}>
                             <div style={{ space: '32px', display: 'flex', flexDirection: 'column', gap: '32px', animation: 'slideInLeft 0.8s ease-out' }}>
-                                <h1 style={{ fontSize: window.innerWidth > 768 ? '56px' : '48px', fontWeight: 'bold', lineHeight: '1.1', letterSpacing: '-1px', animation: 'slideInUp 0.8s ease-out 0.1s both' }}>
+                                <h1 style={{ fontSize: viewportWidth > 768 ? '56px' : '48px', fontWeight: 'bold', lineHeight: '1.1', letterSpacing: '-1px', animation: 'slideInUp 0.8s ease-out 0.1s both' }}>
                                     Your Brand.
                                     <br />
                                     <span style={{ background: 'linear-gradient(to right, #D0D0D0, #A0A0A0, #808080)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
@@ -503,7 +536,7 @@
                                     From product videos to complete brand campaigns, we turn ideas into cinematic content designed for today's digital audience.
                                 </p>
 
-                                <div style={{ display: 'flex', flexDirection: window.innerWidth > 768 ? 'row' : 'column', gap: '16px', paddingTop: '24px', animation: 'slideInUp 0.8s ease-out 0.4s both' }}>
+                                <div style={{ display: 'flex', flexDirection: viewportWidth > 768 ? 'row' : 'column', gap: '16px', paddingTop: '24px', animation: 'slideInUp 0.8s ease-out 0.4s both' }}>
                                     <button
                                         onClick={() => openWhatsApp('Hi AI ADS, I want to start a project.')}
                                         style={{ padding: '16px 32px', backgroundColor: '#B0B0B0', color: '#0F0F0F', border: 'none', borderRadius: '8px', fontWeight: '600', cursor: 'pointer', transition: 'all 0.3s', transform: 'scale(1)' }}
@@ -524,7 +557,7 @@
                             </div>
 
                             {/* Hero Visual */}
-                            {window.innerWidth > 768 && (
+                            {viewportWidth > 768 && (
                                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', animation: 'slideInRight 0.8s ease-out 0.2s both' }}>
                                     <div style={{ position: 'relative', width: '320px', height: '320px' }}>
                                         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(135deg, rgba(176, 176, 176, 0.3), rgba(160, 160, 160, 0.2))', borderRadius: '24px', filter: 'blur(48px)', animation: 'glow 3s ease-in-out infinite' }}></div>
@@ -544,14 +577,14 @@
 
                     {/* Stats Section */}
                     <section style={{ padding: '80px 24px', background: 'linear-gradient(to bottom, transparent, rgba(176, 176, 176, 0.1))' }}>
-                        <div style={{ maxWidth: '1280px', margin: '0 auto', display: 'grid', gridTemplateColumns: window.innerWidth > 768 ? '1fr 1fr 1fr' : '1fr', gap: '48px', textAlign: 'center' }}>
+                        <div style={{ maxWidth: '1280px', margin: '0 auto', display: 'grid', gridTemplateColumns: viewportWidth > 768 ? '1fr 1fr 1fr' : '1fr', gap: '48px', textAlign: 'center' }}>
                             {[
                                 { num: '50+', label: 'Brands Served' },
                                 { num: '200+', label: 'Ads Created' },
                                 { num: '10M+', label: 'Views Generated' }
                             ].map((stat, i) => (
                                 <div key={i} style={{ display: 'flex', flexDirection: 'column', gap: '8px', animation: 'countUp 0.8s ease-out forwards', opacity: 0, animationDelay: `${i * 0.1}s` }}>
-                                    <div style={{ fontSize: window.innerWidth > 768 ? '64px' : '48px', fontWeight: 'bold', color: i % 2 === 0 ? '#B0B0B0' : '#A0A0A0' }}>{stat.num}</div>
+                                    <div style={{ fontSize: viewportWidth > 768 ? '64px' : '48px', fontWeight: 'bold', color: i % 2 === 0 ? '#B0B0B0' : '#A0A0A0' }}>{stat.num}</div>
                                     <p style={{ color: '#9ca3af' }}>{stat.label}</p>
                                 </div>
                             ))}
@@ -562,13 +595,13 @@
                     <section id="services" style={{ padding: '80px 24px', maxWidth: '1280px', margin: '0 auto' }}>
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', marginBottom: '64px' }}>
                             <p style={{ fontSize: '12px', fontWeight: '600', color: '#B0B0B0', letterSpacing: '1px', animation: 'slideInUp 0.6s ease-out' }}>WHAT WE DO</p>
-                            <h2 style={{ fontSize: window.innerWidth > 768 ? '56px' : '44px', fontWeight: 'bold', animation: 'slideInUp 0.6s ease-out 0.1s both' }}>AI-Powered Advertising. Built for Attention.</h2>
+                            <h2 style={{ fontSize: viewportWidth > 768 ? '56px' : '44px', fontWeight: 'bold', animation: 'slideInUp 0.6s ease-out 0.1s both' }}>AI-Powered Advertising. Built for Attention.</h2>
                             <p style={{ fontSize: '18px', color: '#9ca3af', maxWidth: '672px', animation: 'slideInUp 0.6s ease-out 0.2s both' }}>
                                 We create high-impact visual content that helps businesses showcase their products, build their brand, and connect with their audience.
                             </p>
                         </div>
 
-                        <div style={{ display: 'grid', gridTemplateColumns: window.innerWidth > 1024 ? '1fr 1fr 1fr' : window.innerWidth > 768 ? '1fr 1fr' : '1fr', gap: '32px' }}>
+                        <div style={{ display: 'grid', gridTemplateColumns: viewportWidth > 1024 ? '1fr 1fr 1fr' : viewportWidth > 768 ? '1fr 1fr' : '1fr', gap: '32px' }}>
                             {[
                                 {
                                     title: 'AI Video Ads',
@@ -646,7 +679,7 @@
                     <section id="work" style={{ padding: '80px 24px', maxWidth: '1280px', margin: '0 auto' }}>
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', marginBottom: '48px' }}>
                             <p style={{ fontSize: '12px', fontWeight: '600', color: '#B0B0B0', letterSpacing: '1px', animation: 'slideInUp 0.6s ease-out' }}>OUR WORK</p>
-                            <h2 style={{ fontSize: window.innerWidth > 768 ? '56px' : '44px', fontWeight: 'bold', animation: 'slideInUp 0.6s ease-out 0.1s both' }}>Ideas Into Visual Experiences.</h2>
+                            <h2 style={{ fontSize: viewportWidth > 768 ? '56px' : '44px', fontWeight: 'bold', animation: 'slideInUp 0.6s ease-out 0.1s both' }}>Ideas Into Visual Experiences.</h2>
                             <p style={{ fontSize: '18px', color: '#9ca3af', maxWidth: '672px', animation: 'slideInUp 0.6s ease-out 0.2s both' }}>
                                 Explore our creative work across different advertising formats.
                             </p>
@@ -686,13 +719,13 @@
                         </div>
 
                         {/* Portfolio Grid */}
-                        <div style={{ display: 'grid', gridTemplateColumns: window.innerWidth > 1024 ? '1fr 1fr 1fr' : window.innerWidth > 768 ? '1fr 1fr' : '1fr', gap: '24px', marginBottom: '48px' }}>
+                        <div style={{ display: 'grid', gridTemplateColumns: viewportWidth > 1024 ? '1fr 1fr 1fr' : viewportWidth > 768 ? '1fr 1fr' : '1fr', gap: '24px', marginBottom: '48px' }}>
                             {filteredPortfolio.map((project, i) => (
                                 <div
                                     key={project.id}
                                     style={{
-                                        gridColumn: i === 0 && window.innerWidth > 768 ? 'span 2' : 'span 1',
-                                        gridRow: i === 0 && window.innerWidth > 768 ? 'span 2' : 'span 1',
+                                        gridColumn: i === 0 && viewportWidth > 768 ? 'span 2' : 'span 1',
+                                        gridRow: i === 0 && viewportWidth > 768 ? 'span 2' : 'span 1',
                                         border: '1px solid rgba(176, 176, 176, 0.2)',
                                         borderRadius: '16px',
                                         overflow: 'hidden',
@@ -713,7 +746,7 @@
                                         position: 'relative',
                                         background: `linear-gradient(135deg, rgba(${project.color === '#B0B0B0' ? '157, 78, 221' : '0, 245, 255'}, 0.2), rgba(${project.color === '#B0B0B0' ? '0, 245, 255' : '157, 78, 221'}, 0.1))`,
                                         overflow: 'hidden',
-                                        height: i === 0 ? '384px' : project.videoUrl ? (window.innerWidth > 768 ? '360px' : '480px') : '240px',
+                                        height: i === 0 ? '384px' : project.videoUrl ? (viewportWidth > 768 ? '360px' : '480px') : '240px',
                                         display: 'flex',
                                         alignItems: 'center',
                                         justifyContent: 'center'
@@ -796,14 +829,14 @@
                     <section id="process" style={{ padding: '80px 24px', maxWidth: '1280px', margin: '0 auto' }}>
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', marginBottom: '64px' }}>
                             <p style={{ fontSize: '12px', fontWeight: '600', color: '#B0B0B0', letterSpacing: '1px', animation: 'slideInUp 0.6s ease-out' }}>HOW WE WORK</p>
-                            <h2 style={{ fontSize: window.innerWidth > 768 ? '56px' : '44px', fontWeight: 'bold', animation: 'slideInUp 0.6s ease-out 0.1s both' }}>From Idea to Impact.</h2>
+                            <h2 style={{ fontSize: viewportWidth > 768 ? '56px' : '44px', fontWeight: 'bold', animation: 'slideInUp 0.6s ease-out 0.1s both' }}>From Idea to Impact.</h2>
                             <p style={{ fontSize: '18px', color: '#9ca3af', maxWidth: '672px', animation: 'slideInUp 0.6s ease-out 0.2s both' }}>
                                 A simple, transparent process designed to turn your idea into content that works.
                             </p>
                         </div>
 
                         {/* Desktop Timeline */}
-                        {window.innerWidth > 768 && (
+                        {viewportWidth > 768 && (
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '16px' }}>
                                 {[
                                     { title: 'Discovery Call', desc: 'We start by understanding your business, product, audience, goals, and vision.' },
@@ -847,7 +880,7 @@
                         )}
 
                         {/* Mobile Timeline */}
-                        {window.innerWidth <= 768 && (
+                        {viewportWidth <= 768 && (
                             <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
                                 {[
                                     { title: 'Discovery Call', desc: 'We start by understanding your business, product, audience, goals, and vision.' },
@@ -892,7 +925,7 @@
                         }}></div>
 
                         <div style={{ maxWidth: '896px', margin: '0 auto', textAlign: 'center', display: 'flex', flexDirection: 'column', gap: '24px' }}>
-                            <h2 style={{ fontSize: window.innerWidth > 768 ? '56px' : '44px', fontWeight: 'bold', letterSpacing: '-1px', animation: 'slideInUp 0.6s ease-out' }}>
+                            <h2 style={{ fontSize: viewportWidth > 768 ? '56px' : '44px', fontWeight: 'bold', letterSpacing: '-1px', animation: 'slideInUp 0.6s ease-out' }}>
                                 READY TO MAKE YOUR BRAND <span style={{ background: 'linear-gradient(to right, #B0B0B0, #A0A0A0)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>STAND OUT?</span>
                             </h2>
 
@@ -934,7 +967,7 @@
                     <section id="contact" style={{ padding: '80px 24px', maxWidth: '896px', margin: '0 auto' }}>
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', marginBottom: '48px', textAlign: 'center' }}>
                             <p style={{ fontSize: '12px', fontWeight: '600', color: '#B0B0B0', letterSpacing: '1px', animation: 'slideInUp 0.6s ease-out' }}>LET'S WORK TOGETHER</p>
-                            <h2 style={{ fontSize: window.innerWidth > 768 ? '56px' : '44px', fontWeight: 'bold', animation: 'slideInUp 0.6s ease-out 0.1s both' }}>Have a Project in Mind?</h2>
+                            <h2 style={{ fontSize: viewportWidth > 768 ? '56px' : '44px', fontWeight: 'bold', animation: 'slideInUp 0.6s ease-out 0.1s both' }}>Have a Project in Mind?</h2>
                             <p style={{ fontSize: '16px', color: '#9ca3af', animation: 'slideInUp 0.6s ease-out 0.2s both' }}>
                                 Whether you're launching a new product, promoting your business, building your brand, or looking for fresh social media content — we'd love to hear from you.
                             </p>
@@ -960,7 +993,7 @@
                                 aria-hidden="true"
                                 style={{ position: 'absolute', left: '-10000px', top: 'auto', width: '1px', height: '1px', overflow: 'hidden' }}
                             />
-                            <div style={{ display: 'grid', gridTemplateColumns: window.innerWidth > 768 ? '1fr 1fr' : '1fr', gap: '24px' }}>
+                            <div style={{ display: 'grid', gridTemplateColumns: viewportWidth > 768 ? '1fr 1fr' : '1fr', gap: '24px' }}>
                                 <div>
                                     <label style={{ display: 'block', fontSize: '12px', fontWeight: '600', marginBottom: '12px' }}>Name *</label>
                                     <input
@@ -1102,7 +1135,7 @@
                         </form>
 
                         {/* Direct Contact */}
-                        <div style={{ display: 'grid', gridTemplateColumns: window.innerWidth > 768 ? '1fr 1fr 1fr' : '1fr', gap: '24px', marginTop: '48px', textAlign: 'center' }}>
+                        <div style={{ display: 'grid', gridTemplateColumns: viewportWidth > 768 ? '1fr 1fr 1fr' : '1fr', gap: '24px', marginTop: '48px', textAlign: 'center' }}>
                             <div style={{ animation: 'slideInUp 0.6s ease-out 0.3s both' }}>
                                 <p style={{ fontSize: '12px', color: '#9ca3af', marginBottom: '8px' }}>WhatsApp</p>
                                 <button
@@ -1157,7 +1190,9 @@
 
                     {/* Floating WhatsApp Button */}
                     <button
+                        className="whatsapp-floating"
                         onClick={() => openWhatsApp('Hi AI ADS, I\'m interested in creating an advertisement for my business.')}
+
                         style={{
                             position: 'fixed',
                             bottom: '32px',
@@ -1193,7 +1228,7 @@
                         maxWidth: '1280px',
                         margin: '0 auto'
                     }}>
-                        <div style={{ display: 'grid', gridTemplateColumns: window.innerWidth > 768 ? '1fr 1fr 1fr 1fr' : '1fr', gap: '48px', marginBottom: '48px' }}>
+                        <div style={{ display: 'grid', gridTemplateColumns: viewportWidth > 768 ? '1fr 1fr 1fr 1fr' : '1fr', gap: '48px', marginBottom: '48px' }}>
                             <div>
                                 <h3 style={{ marginBottom: '8px' }}><img src="/manus-storage/logo_b66763fe.jpeg" alt="AI ADS — AI Powered Video Advertisement" width="128" height="128" loading="lazy" style={{ display: 'block', width: '128px', height: '128px', objectFit: 'contain' }} /></h3>
                                 <p style={{ color: '#9ca3af' }}>Your Brand. Reimagined with AI.</p>

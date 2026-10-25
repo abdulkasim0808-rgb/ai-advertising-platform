@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="AI ADS">
+  <defs>
+    <linearGradient id="silver" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f1f1f1"/>
+      <stop offset="1" stop-color="#8a8a8a"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="112" fill="#0a0a0a"/>
+  <rect x="24" y="24" width="464" height="464" rx="96" fill="none" stroke="#b0b0b0" stroke-opacity=".35" stroke-width="3"/>
+  <path d="M102 336 174 160h38l72 176h-40l-14-38h-76l-14 38zm64-71h51l-25-67z" fill="url(#silver)"/>
+  <path d="M303 160h48c55 0 91 34 91 88s-36 88-91 88h-48zm39 34v108h9c33 0 51-19 51-54s-18-54-51-54z" fill="url(#silver)"/>
+  <path d="M102 382h308" stroke="#b0b0b0" stroke-opacity=".55" stroke-width="3"/>
+  <text x="256" y="432" fill="#c8c8c8" text-anchor="middle" font-family="Arial,sans-serif" font-size="29" font-weight="700" letter-spacing="11">AI ADS</text>
+</svg>
