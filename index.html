@@ -1,0 +1,1249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>AI ADS - Premium AI Advertising Agency</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/react.min.js"></script>
+    <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/react-dom.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --color-bg: #0F0F0F;
+            --color-bg-light: #1F1F1F;
+            --color-accent: #B0B0B0;
+            --color-accent-dark: #808080;
+            --color-text: #FFFFFF;
+            --color-text-secondary: #CCCCCC;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        @media (max-width: 768px) {
+            html {
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            html {
+                font-size: 13px;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes countUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        @keyframes glow {
+            0%, 100% {
+                box-shadow: 0 0 20px rgba(176, 176, 176, 0.3);
+            }
+            50% {
+                box-shadow: 0 0 40px rgba(176, 176, 176, 0.6);
+            }
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes shimmer {
+            0% {
+                background-position: -1000px 0;
+            }
+            100% {
+                background-position: 1000px 0;
+            }
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .animate-count-up {
+            animation: countUp 0.8s ease-out forwards;
+            opacity: 0;
+        }
+
+        .animate-pulse {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        .animate-slide-in-up {
+            animation: slideInUp 0.6s ease-out;
+        }
+
+        .animate-slide-in-down {
+            animation: slideInDown 0.6s ease-out;
+        }
+
+        .animate-slide-in-left {
+            animation: slideInLeft 0.6s ease-out;
+        }
+
+        .animate-slide-in-right {
+            animation: slideInRight 0.6s ease-out;
+        }
+
+        .animate-scale-in {
+            animation: scaleIn 0.6s ease-out;
+        }
+
+        .animate-float {
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .animate-glow {
+            animation: glow 3s ease-in-out infinite;
+        }
+
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, rgba(176, 176, 176, 0.2), rgba(160, 160, 160, 0.1));
+            border: 1px solid rgba(176, 176, 176, 0.3);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .service-icon svg {
+            width: 32px;
+            height: 32px;
+            stroke: #B0B0B0;
+            stroke-width: 1.5;
+            fill: none;
+        }
+
+        .service-card:hover .service-icon {
+            background: linear-gradient(135deg, rgba(176, 176, 176, 0.4), rgba(160, 160, 160, 0.2));
+            border-color: rgba(176, 176, 176, 0.6);
+            transform: translateY(-8px) rotate(5deg);
+        }
+
+        .bg-gradient-text {
+            background: linear-gradient(to right, #FFFFFF, #B0B0B0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .gradient-purple-cyan {
+            background: linear-gradient(135deg, #B0B0B0, #A0A0A0);
+        }
+
+        /* Mobile Optimization */
+        @media (max-width: 768px) {
+            nav {
+                padding: 12px 16px;
+            }
+
+            section {
+                padding: 40px 16px;
+            }
+
+            h1, h2 {
+                font-size: clamp(28px, 8vw, 48px) !important;
+            }
+
+            h3 {
+                font-size: clamp(18px, 5vw, 24px) !important;
+            }
+
+            p {
+                font-size: clamp(14px, 3.5vw, 18px) !important;
+            }
+
+            button {
+                padding: 12px 24px !important;
+                font-size: 14px !important;
+                min-height: 44px;
+                min-width: 44px;
+                touch-action: manipulation;
+            }
+
+            input, textarea {
+                padding: 14px 16px !important;
+                font-size: 16px !important;
+            }
+
+            .service-card {
+                padding: 20px !important;
+            }
+
+            .service-icon {
+                width: 48px !important;
+                height: 48px !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            nav {
+                padding: 12px 12px;
+            }
+
+            section {
+                padding: 32px 12px;
+            }
+
+            h1 {
+                font-size: 32px !important;
+                line-height: 1.2 !important;
+            }
+
+            h2 {
+                font-size: 28px !important;
+            }
+
+            button {
+                width: 100% !important;
+                padding: 14px 20px !important;
+            }
+
+            .service-card {
+                padding: 16px !important;
+                margin-bottom: 8px;
+            }
+
+            form {
+                padding: 20px !important;
+            }
+
+            input, textarea {
+                width: 100% !important;
+                padding: 12px 14px !important;
+                font-size: 16px !important;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef } = React;
+
+        const AIADSWebsite = () => {
+            const [isMenuOpen, setIsMenuOpen] = useState(false);
+            const [scrolled, setScrolled] = useState(false);
+            const [selectedFilter, setSelectedFilter] = useState('all');
+            const [formData, setFormData] = useState({ name: '', phone: '', email: '', project: '', website: '' });
+            const [formStatus, setFormStatus] = useState('');
+
+            useEffect(() => {
+                const handleScroll = () => {
+                    setScrolled(window.scrollY > 50);
+                };
+                window.addEventListener('scroll', handleScroll);
+                return () => window.removeEventListener('scroll', handleScroll);
+            }, []);
+
+            const openWhatsApp = (message) => {
+                const phone = '919487143267';
+                const text = encodeURIComponent(message);
+                window.open(`https://wa.me/${phone}?text=${text}`, '_blank');
+            };
+
+            const GOOGLE_SHEETS_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxcPA4WrbmrF7ImjhI7IImtTVqlobXZGCypLt8imGQCx9KHlJuWGbUqONTrRrglpoqk/exec';
+
+            const submitLeadToGoogleSheets = (lead) => {
+                const payload = new URLSearchParams({
+                    name: lead.name,
+                    phone: lead.phone,
+                    email: lead.email,
+                    project: lead.project,
+                    website: lead.website
+                });
+                return fetch(GOOGLE_SHEETS_WEB_APP_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: payload.toString()
+                });
+            };
+
+            const handleFormSubmit = (e) => {
+                e.preventDefault();
+                const lead = {
+                    name: formData.name.trim(),
+                    phone: formData.phone.trim(),
+                    email: formData.email.trim(),
+                    project: formData.project.trim(),
+                    website: formData.website.trim()
+                };
+                if (lead.website) return;
+                if (!lead.name || !lead.phone || !lead.project) {
+                    setFormStatus('Please fill all required fields');
+                    setTimeout(() => setFormStatus(''), 3000);
+                    return;
+                }
+                submitLeadToGoogleSheets(lead).catch(() => {
+                    console.error('Unable to submit this enquiry to the AI ADS lead sheet.');
+                });
+                setFormStatus('success');
+                setTimeout(() => {
+                    setFormStatus('');
+                    setFormData({ name: '', phone: '', email: '', project: '', website: '' });
+                }, 3000);
+            };
+
+            const portfolio = [
+                { id: 1, title: 'Fashion Brand Campaign', category: 'brand-campaigns', color: '#B0B0B0', description: 'Cinematic advertisement for luxury fashion brand' },
+                { id: 2, title: 'Product Launch Video', category: 'video-ads', color: '#A0A0A0', description: 'High-impact product reveal advertisement', videoUrl: '/manus-storage/2_a6fc306d.mp4' },
+                { id: 3, title: 'E-commerce Showcase', category: 'product-showcases', color: '#B0B0B0', description: 'Premium product showcase for online store' },
+                { id: 4, title: 'Brand Story Film', category: 'brand-films', color: '#A0A0A0', description: 'Story-driven brand experience', videoUrl: '/manus-storage/4_b9f99baa.mp4' },
+                { id: 5, title: 'Social Media Series', category: 'social-content', color: '#B0B0B0', description: 'Engaging reel and story content' },
+                { id: 6, title: 'Tech Product Ad', category: 'video-ads', color: '#A0A0A0', description: 'Cinematic tech product advertisement' },
+                { id: 7, title: 'Featured Video', category: 'video-ads', color: '#A0A0A0', description: 'Watch the featured video sample.', videoUrl: '/manus-storage/5_9f9a26a0.mp4', posterUrl: '/manus-storage/aiads-featured-video-poster_27e3f1fd.jpg' },
+                { id: 8, title: 'Social Content Video', category: 'social-content', color: '#B0B0B0', description: 'Short-form video for social media', videoUrl: '/manus-storage/1_7cdd7505.mp4' },
+            ];
+
+            const filteredPortfolio = selectedFilter === 'all'
+                ? portfolio
+                : portfolio.filter(item => item.category === selectedFilter);
+
+            return (
+                <div style={{ backgroundColor: '#0A0A0A', color: 'white' }}>
+                    {/* Navigation */}
+                    <nav style={{
+                        position: 'fixed',
+                        width: '100%',
+                        zIndex: 50,
+                        transition: 'all 0.3s ease',
+                        backgroundColor: scrolled ? 'rgba(10, 10, 10, 0.95)' : 'transparent',
+                        backdropFilter: scrolled ? 'blur(12px)' : 'none',
+                        padding: scrolled ? '12px 24px' : '24px'
+                    }}>
+                        <div style={{ maxWidth: '1280px', margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                            <a href="/" aria-label="AI ADS home" style={{ display: 'inline-flex', alignItems: 'center', textDecoration: 'none' }}>
+                                <img src="/manus-storage/logo_b66763fe.jpeg" alt="" width={window.innerWidth > 768 ? 84 : 64} height={window.innerWidth > 768 ? 84 : 64} style={{ display: 'block', objectFit: 'contain' }} />
+                            </a>
+
+                            <div style={{ display: 'none' }} className="nav-desktop" style={{ display: window.innerWidth > 768 ? 'flex' : 'none', gap: '48px', alignItems: 'center' }}>
+                                <a href="#services" style={{ fontSize: '14px', cursor: 'pointer', transition: 'color 0.3s' }} onMouseEnter={(e) => e.target.style.color = '#c084fc'} onMouseLeave={(e) => e.target.style.color = 'white'}>Services</a>
+                                <a href="#work" style={{ fontSize: '14px', cursor: 'pointer', transition: 'color 0.3s' }} onMouseEnter={(e) => e.target.style.color = '#c084fc'} onMouseLeave={(e) => e.target.style.color = 'white'}>Work</a>
+                                <a href="#process" style={{ fontSize: '14px', cursor: 'pointer', transition: 'color 0.3s' }} onMouseEnter={(e) => e.target.style.color = '#c084fc'} onMouseLeave={(e) => e.target.style.color = 'white'}>Process</a>
+                                <a href="#contact" style={{ fontSize: '14px', cursor: 'pointer', transition: 'color 0.3s' }} onMouseEnter={(e) => e.target.style.color = '#c084fc'} onMouseLeave={(e) => e.target.style.color = 'white'}>Contact</a>
+                                <button
+                                    onClick={() => openWhatsApp('Hi AI ADS, I want to start a project.')}
+                                    style={{ padding: '8px 24px', backgroundColor: '#B0B0B0', color: '#0F0F0F', border: 'none', borderRadius: '8px', cursor: 'pointer', fontSize: '14px', fontWeight: '500', transition: 'background-color 0.3s' }}
+                                    onMouseEnter={(e) => e.target.style.backgroundColor = '#CCCCCC'}
+                                    onMouseLeave={(e) => e.target.style.backgroundColor = '#B0B0B0'}
+                                >
+                                    Start a Project
+                                </button>
+                            </div>
+
+                            <button
+                                style={{ display: window.innerWidth > 768 ? 'none' : 'block', background: 'none', border: 'none', color: 'white', cursor: 'pointer', fontSize: '24px' }}
+                                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                            >
+                                {isMenuOpen ? '✕' : '☰'}
+                            </button>
+                        </div>
+
+                        {/* Mobile Menu */}
+                        {isMenuOpen && (
+                            <div style={{ backgroundColor: 'rgba(10, 10, 10, 0.95)', backdropFilter: 'blur(12px)', marginTop: '16px', padding: '24px' }}>
+                                <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                                    <a href="#services" style={{ fontSize: '14px', cursor: 'pointer' }}>Services</a>
+                                    <a href="#work" style={{ fontSize: '14px', cursor: 'pointer' }}>Work</a>
+                                    <a href="#process" style={{ fontSize: '14px', cursor: 'pointer' }}>Process</a>
+                                    <a href="#contact" style={{ fontSize: '14px', cursor: 'pointer' }}>Contact</a>
+                                    <button
+                                        onClick={() => { openWhatsApp('Hi AI ADS, I want to start a project.'); setIsMenuOpen(false); }}
+                                        style={{ width: '100%', padding: '8px 24px', backgroundColor: '#B0B0B0', color: 'white', border: 'none', borderRadius: '8px', cursor: 'pointer', fontSize: '14px', fontWeight: '500', marginTop: '8px' }}
+                                    >
+                                        Start a Project
+                                    </button>
+                                </div>
+                            </div>
+                        )}
+                    </nav>
+
+                    {/* Hero Section */}
+                    <section style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', paddingTop: '80px', position: 'relative', overflow: 'hidden', padding: '24px' }}>
+                        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(176, 176, 176, 0.2), transparent)', opacity: 0, transition: 'opacity 0.5s' }} onMouseEnter={(e) => e.style.opacity = '1'} onMouseLeave={(e) => e.style.opacity = '0'}></div>
+
+                        <div style={{ maxWidth: '1280px', margin: '0 auto', width: '100%', display: 'grid', gridTemplateColumns: window.innerWidth > 768 ? '1fr 1fr' : '1fr', gap: '48px', alignItems: 'center', position: 'relative', zIndex: 10 }}>
+                            <div style={{ space: '32px', display: 'flex', flexDirection: 'column', gap: '32px', animation: 'slideInLeft 0.8s ease-out' }}>
+                                <h1 style={{ fontSize: window.innerWidth > 768 ? '56px' : '48px', fontWeight: 'bold', lineHeight: '1.1', letterSpacing: '-1px', animation: 'slideInUp 0.8s ease-out 0.1s both' }}>
+                                    Your Brand.
+                                    <br />
+                                    <span style={{ background: 'linear-gradient(to right, #D0D0D0, #A0A0A0, #808080)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
+                                        Reimagined
+                                    </span>
+                                    <br />
+                                    with AI.
+                                </h1>
+
+                                <p style={{ fontSize: '20px', color: '#d1d5db', maxWidth: '672px', lineHeight: '1.6', animation: 'slideInUp 0.8s ease-out 0.2s both' }}>
+                                    Scroll-stopping AI video advertisements crafted to make your brand impossible to ignore.
+                                </p>
+
+                                <p style={{ fontSize: '18px', color: '#9ca3af', maxWidth: '672px', lineHeight: '1.5', animation: 'slideInUp 0.8s ease-out 0.3s both' }}>
+                                    From product videos to complete brand campaigns, we turn ideas into cinematic content designed for today's digital audience.
+                                </p>
+
+                                <div style={{ display: 'flex', flexDirection: window.innerWidth > 768 ? 'row' : 'column', gap: '16px', paddingTop: '24px', animation: 'slideInUp 0.8s ease-out 0.4s both' }}>
+                                    <button
+                                        onClick={() => openWhatsApp('Hi AI ADS, I want to start a project.')}
+                                        style={{ padding: '16px 32px', backgroundColor: '#B0B0B0', color: '#0F0F0F', border: 'none', borderRadius: '8px', fontWeight: '600', cursor: 'pointer', transition: 'all 0.3s', transform: 'scale(1)' }}
+                                        onMouseEnter={(e) => { e.target.style.backgroundColor = '#CCCCCC'; e.target.style.transform = 'scale(1.05)'; }}
+                                        onMouseLeave={(e) => { e.target.style.backgroundColor = '#B0B0B0'; e.target.style.transform = 'scale(1)'; }}
+                                    >
+                                        Start a Project
+                                    </button>
+                                    <button
+                                        onClick={() => document.getElementById('work').scrollIntoView({ behavior: 'smooth' })}
+                                        style={{ padding: '16px 32px', border: '2px solid #B0B0B0', color: 'white', backgroundColor: 'transparent', borderRadius: '8px', fontWeight: '600', cursor: 'pointer', transition: 'all 0.3s' }}
+                                        onMouseEnter={(e) => e.target.style.backgroundColor = 'rgba(176, 176, 176, 0.1)'}
+                                        onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}
+                                    >
+                                        View Our Work
+                                    </button>
+                                </div>
+                            </div>
+
+                            {/* Hero Visual */}
+                            {window.innerWidth > 768 && (
+                                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', animation: 'slideInRight 0.8s ease-out 0.2s both' }}>
+                                    <div style={{ position: 'relative', width: '320px', height: '320px' }}>
+                                        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(135deg, rgba(176, 176, 176, 0.3), rgba(160, 160, 160, 0.2))', borderRadius: '24px', filter: 'blur(48px)', animation: 'glow 3s ease-in-out infinite' }}></div>
+                                        <div style={{ position: 'absolute', inset: 0, border: '1px solid rgba(176, 176, 176, 0.2)', borderRadius: '24px', backdropFilter: 'blur(10px)', display: 'flex', alignItems: 'center', justifyContent: 'center', animation: 'float 4s ease-in-out infinite' }}>
+                                            <svg width="140" height="140" viewBox="0 0 140 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <rect x="20" y="50" width="100" height="70" rx="8" stroke="#B0B0B0" strokeWidth="2" fill="none"/>
+                                                <circle cx="70" cy="85" r="20" stroke="#B0B0B0" strokeWidth="2" fill="none"/>
+                                                <circle cx="70" cy="85" r="10" fill="#B0B0B0"/>
+                                                <path d="M 40 50 L 30 20 M 100 50 L 110 20" stroke="#B0B0B0" strokeWidth="2"/>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                    </section>
+
+                    {/* Stats Section */}
+                    <section style={{ padding: '80px 24px', background: 'linear-gradient(to bottom, transparent, rgba(176, 176, 176, 0.1))' }}>
+                        <div style={{ maxWidth: '1280px', margin: '0 auto', display: 'grid', gridTemplateColumns: window.innerWidth > 768 ? '1fr 1fr 1fr' : '1fr', gap: '48px', textAlign: 'center' }}>
+                            {[
+                                { num: '50+', label: 'Brands Served' },
+                                { num: '200+', label: 'Ads Created' },
+                                { num: '10M+', label: 'Views Generated' }
+                            ].map((stat, i) => (
+                                <div key={i} style={{ display: 'flex', flexDirection: 'column', gap: '8px', animation: 'countUp 0.8s ease-out forwards', opacity: 0, animationDelay: `${i * 0.1}s` }}>
+                                    <div style={{ fontSize: window.innerWidth > 768 ? '64px' : '48px', fontWeight: 'bold', color: i % 2 === 0 ? '#B0B0B0' : '#A0A0A0' }}>{stat.num}</div>
+                                    <p style={{ color: '#9ca3af' }}>{stat.label}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </section>
+
+                    {/* Services Section */}
+                    <section id="services" style={{ padding: '80px 24px', maxWidth: '1280px', margin: '0 auto' }}>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', marginBottom: '64px' }}>
+                            <p style={{ fontSize: '12px', fontWeight: '600', color: '#B0B0B0', letterSpacing: '1px', animation: 'slideInUp 0.6s ease-out' }}>WHAT WE DO</p>
+                            <h2 style={{ fontSize: window.innerWidth > 768 ? '56px' : '44px', fontWeight: 'bold', animation: 'slideInUp 0.6s ease-out 0.1s both' }}>AI-Powered Advertising. Built for Attention.</h2>
+                            <p style={{ fontSize: '18px', color: '#9ca3af', maxWidth: '672px', animation: 'slideInUp 0.6s ease-out 0.2s both' }}>
+                                We create high-impact visual content that helps businesses showcase their products, build their brand, and connect with their audience.
+                            </p>
+                        </div>
+
+                        <div style={{ display: 'grid', gridTemplateColumns: window.innerWidth > 1024 ? '1fr 1fr 1fr' : window.innerWidth > 768 ? '1fr 1fr' : '1fr', gap: '32px' }}>
+                            {[
+                                {
+                                    title: 'AI Video Ads',
+                                    desc: 'Cinematic AI-powered advertisements created for today\'s biggest digital platforms.',
+                                    highlight: 'Turn your product into a story people want to watch.',
+                                    icon: (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="22" y2="7"/><line x1="2" y1="17" x2="22" y2="17"/></svg>)
+                                },
+                                {
+                                    title: 'Reels & Shorts',
+                                    desc: 'Short-form content designed for today\'s fastest-growing platforms.',
+                                    highlight: 'Short video. Big attention.',
+                                    icon: (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="12" cy="12" r="3"/></svg>)
+                                },
+                                {
+                                    title: 'Brand Campaigns',
+                                    desc: 'From strategy to creative execution, we build campaigns around your brand.',
+                                    highlight: 'One idea. Multiple creatives. One powerful campaign.',
+                                    icon: (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l4 2"/></svg>)
+                                },
+                                {
+                                    title: 'Social Content',
+                                    desc: 'Keep your brand active, consistent, and visually engaging.',
+                                    highlight: 'Your brand deserves more than just another post.',
+                                    icon: (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>)
+                                },
+                                {
+                                    title: 'Product Showcases',
+                                    desc: 'Make your product the centre of attention.',
+                                    highlight: 'Show the product. Tell the story. Drive the attention.',
+                                    icon: (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M6 9l6-7 6 7M3 9h18v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9z"/><circle cx="12" cy="15" r="2"/></svg>)
+                                },
+                                {
+                                    title: 'AI Voiceovers',
+                                    desc: 'Bring your advertisements to life with AI-powered voiceovers.',
+                                    highlight: 'One message. Multiple languages. Wider reach.',
+                                    icon: (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 1a7 7 0 0 0-7 7v4a7 7 0 0 0 14 0V8a7 7 0 0 0-7-7z"/><path d="M8 19v2a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2"/><line x1="12" y1="23" x2="12" y2="19"/></svg>)
+                                }
+                            ].map((service, i) => (
+                                <div
+                                    key={i}
+                                    className="service-card"
+                                    style={{
+                                        padding: '32px',
+                                        border: '1px solid rgba(176, 176, 176, 0.2)',
+                                        borderRadius: '16px',
+                                        transition: 'all 0.3s',
+                                        cursor: 'pointer',
+                                        animation: `slideInUp 0.6s ease-out ${i * 0.1}s both`
+                                    }}
+                                    onMouseEnter={(e) => {
+                                        e.currentTarget.style.borderColor = 'rgba(176, 176, 176, 0.6)';
+                                        e.currentTarget.style.backgroundColor = 'rgba(176, 176, 176, 0.05)';
+                                        e.currentTarget.style.boxShadow = '0 20px 25px -5px rgba(176, 176, 176, 0.1)';
+                                        e.currentTarget.style.transform = 'translateY(-10px)';
+                                    }}
+                                    onMouseLeave={(e) => {
+                                        e.currentTarget.style.borderColor = 'rgba(176, 176, 176, 0.2)';
+                                        e.currentTarget.style.backgroundColor = 'transparent';
+                                        e.currentTarget.style.boxShadow = 'none';
+                                        e.currentTarget.style.transform = 'translateY(0)';
+                                    }}
+                                >
+                                    <div className="service-icon" style={{ marginBottom: '16px', color: '#B0B0B0' }}>
+                                        {service.icon}
+                                    </div>
+                                    <h3 style={{ fontSize: '20px', fontWeight: 'bold', marginBottom: '12px' }}>{service.title}</h3>
+                                    <p style={{ color: '#9ca3af', marginBottom: '16px' }}>{service.desc}</p>
+                                    <p style={{ color: '#B0B0B0', fontWeight: '600', fontStyle: 'italic' }}>{service.highlight}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </section>
+
+                    {/* Portfolio Section */}
+                    <section id="work" style={{ padding: '80px 24px', maxWidth: '1280px', margin: '0 auto' }}>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', marginBottom: '48px' }}>
+                            <p style={{ fontSize: '12px', fontWeight: '600', color: '#B0B0B0', letterSpacing: '1px', animation: 'slideInUp 0.6s ease-out' }}>OUR WORK</p>
+                            <h2 style={{ fontSize: window.innerWidth > 768 ? '56px' : '44px', fontWeight: 'bold', animation: 'slideInUp 0.6s ease-out 0.1s both' }}>Ideas Into Visual Experiences.</h2>
+                            <p style={{ fontSize: '18px', color: '#9ca3af', maxWidth: '672px', animation: 'slideInUp 0.6s ease-out 0.2s both' }}>
+                                Explore our creative work across different advertising formats.
+                            </p>
+                        </div>
+
+                        {/* Filter Buttons */}
+                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px', marginBottom: '48px' }}>
+                            {[
+                                { label: 'All', value: 'all' },
+                                { label: 'Video Ads', value: 'video-ads' },
+                                { label: 'Brand Campaigns', value: 'brand-campaigns' },
+                                { label: 'Product Showcases', value: 'product-showcases' },
+                                { label: 'Brand Films', value: 'brand-films' },
+                                { label: 'Social Content', value: 'social-content' }
+                            ].map(filter => (
+                                <button
+                                    key={filter.value}
+                                    onClick={() => setSelectedFilter(filter.value)}
+                                    style={{
+                                        padding: '8px 24px',
+                                        borderRadius: '9999px',
+                                        fontWeight: '500',
+                                        border: 'none',
+                                        cursor: 'pointer',
+                                        transition: 'all 0.3s',
+                                        backgroundColor: selectedFilter === filter.value ? '#B0B0B0' : 'transparent',
+                                        color: selectedFilter === filter.value ? 'white' : '#d1d5db',
+                                        borderTop: selectedFilter === filter.value ? 'none' : `1px solid rgba(176, 176, 176, 0.3)`,
+                                        borderRight: selectedFilter === filter.value ? 'none' : `1px solid rgba(176, 176, 176, 0.3)`,
+                                        borderBottom: selectedFilter === filter.value ? 'none' : `1px solid rgba(176, 176, 176, 0.3)`,
+                                        borderLeft: selectedFilter === filter.value ? 'none' : `1px solid rgba(176, 176, 176, 0.3)`
+                                    }}
+                                >
+                                    {filter.label}
+                                </button>
+                            ))}
+                        </div>
+
+                        {/* Portfolio Grid */}
+                        <div style={{ display: 'grid', gridTemplateColumns: window.innerWidth > 1024 ? '1fr 1fr 1fr' : window.innerWidth > 768 ? '1fr 1fr' : '1fr', gap: '24px', marginBottom: '48px' }}>
+                            {filteredPortfolio.map((project, i) => (
+                                <div
+                                    key={project.id}
+                                    style={{
+                                        gridColumn: i === 0 && window.innerWidth > 768 ? 'span 2' : 'span 1',
+                                        gridRow: i === 0 && window.innerWidth > 768 ? 'span 2' : 'span 1',
+                                        border: '1px solid rgba(176, 176, 176, 0.2)',
+                                        borderRadius: '16px',
+                                        overflow: 'hidden',
+                                        transition: 'all 0.3s',
+                                        cursor: 'pointer',
+                                        animation: `slideInUp 0.6s ease-out ${i * 0.1}s both`
+                                    }}
+                                    onMouseEnter={(e) => {
+                                        e.currentTarget.style.borderColor = 'rgba(176, 176, 176, 0.6)';
+                                        e.currentTarget.style.boxShadow = '0 20px 40px rgba(176, 176, 176, 0.2)';
+                                    }}
+                                    onMouseLeave={(e) => {
+                                        e.currentTarget.style.borderColor = 'rgba(176, 176, 176, 0.2)';
+                                        e.currentTarget.style.boxShadow = 'none';
+                                    }}
+                                >
+                                    <div style={{
+                                        position: 'relative',
+                                        background: `linear-gradient(135deg, rgba(${project.color === '#B0B0B0' ? '157, 78, 221' : '0, 245, 255'}, 0.2), rgba(${project.color === '#B0B0B0' ? '0, 245, 255' : '157, 78, 221'}, 0.1))`,
+                                        overflow: 'hidden',
+                                        height: i === 0 ? '384px' : project.videoUrl ? (window.innerWidth > 768 ? '360px' : '480px') : '240px',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center'
+                                    }}>
+                                        <div style={{
+                                            position: 'absolute',
+                                            inset: 0,
+                                            background: `radial-gradient(circle at 30% 50%, ${project.color}20, transparent)`,
+                                            animation: 'pulse 3s ease-in-out infinite'
+                                        }}></div>
+                                        {project.videoUrl ? (
+                                            <video src={project.videoUrl} poster={project.posterUrl} controls playsInline preload="metadata" aria-label={`${project.title} video`} onPlay={(event) => {
+                                                const activeVideo = event.currentTarget;
+                                                document.querySelectorAll('#work video').forEach((video) => {
+                                                    if (video !== activeVideo) video.pause();
+                                                });
+                                            }} style={{ position: 'relative', zIndex: 10, display: 'block', width: '100%', height: '100%', objectFit: 'contain', backgroundColor: '#000' }} />
+                                        ) : (
+                                            <>
+                                                <svg width="100" height="100" viewBox="0 0 100 100" fill="none" style={{ zIndex: 10, animation: 'float 3s ease-in-out infinite' }}>
+                                                    <rect x="15" y="25" width="70" height="50" rx="4" stroke={project.color} strokeWidth="2"/>
+                                                    <circle cx="50" cy="50" r="12" stroke={project.color} strokeWidth="2" fill="none"/>
+                                                    <circle cx="50" cy="50" r="6" fill={project.color}/>
+                                                </svg>
+                                                <div style={{
+                                                    position: 'absolute',
+                                                    inset: 0,
+                                                    backgroundColor: 'rgba(0, 0, 0, 0)',
+                                                    display: 'flex',
+                                                    alignItems: 'center',
+                                                    justifyContent: 'center',
+                                                    transition: 'all 0.3s'
+                                                }}
+                                                onMouseEnter={(e) => {
+                                                    e.currentTarget.style.backgroundColor = 'rgba(0, 0, 0, 0.4)';
+                                                }}
+                                                onMouseLeave={(e) => {
+                                                    e.currentTarget.style.backgroundColor = 'rgba(0, 0, 0, 0)';
+                                                }}
+                                                >
+                                                    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" style={{ opacity: 0, transition: 'opacity 0.3s' }} onMouseEnter={(e) => e.currentTarget.style.opacity = '1'} onMouseLeave={(e) => e.currentTarget.style.opacity = '0'}>
+                                                        <circle cx="24" cy="24" r="20" fill="white" opacity="0.9"/>
+                                                        <polygon points="20,16 20,32 32,24" fill="white"/>
+                                                    </svg>
+                                                </div>
+                                            </>
+                                        )}
+                                    </div>
+                                    <div style={{ padding: '24px', animation: `slideInUp 0.6s ease-out ${i * 0.1 + 0.2}s both` }}>
+                                        <p style={{ color: '#B0B0B0', fontSize: '12px', fontWeight: '600', marginBottom: '8px' }}>{project.category.toUpperCase()}</p>
+                                        <h3 style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '8px' }}>{project.title}</h3>
+                                        <p style={{ color: '#9ca3af' }}>{project.description}</p>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+
+                        <div style={{ textAlign: 'center' }}>
+                            <button
+                                onClick={() => openWhatsApp('I\'d like to see more of your work and discuss a project.')}
+                                style={{
+                                    padding: '12px 32px',
+                                    border: '1px solid #B0B0B0',
+                                    backgroundColor: 'transparent',
+                                    color: 'white',
+                                    borderRadius: '8px',
+                                    fontWeight: '600',
+                                    cursor: 'pointer',
+                                    transition: 'all 0.3s'
+                                }}
+                                onMouseEnter={(e) => e.target.style.backgroundColor = 'rgba(176, 176, 176, 0.1)'}
+                                onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}
+                            >
+                                Explore All Work →
+                            </button>
+                        </div>
+                    </section>
+
+                    {/* Process Section */}
+                    <section id="process" style={{ padding: '80px 24px', maxWidth: '1280px', margin: '0 auto' }}>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', marginBottom: '64px' }}>
+                            <p style={{ fontSize: '12px', fontWeight: '600', color: '#B0B0B0', letterSpacing: '1px', animation: 'slideInUp 0.6s ease-out' }}>HOW WE WORK</p>
+                            <h2 style={{ fontSize: window.innerWidth > 768 ? '56px' : '44px', fontWeight: 'bold', animation: 'slideInUp 0.6s ease-out 0.1s both' }}>From Idea to Impact.</h2>
+                            <p style={{ fontSize: '18px', color: '#9ca3af', maxWidth: '672px', animation: 'slideInUp 0.6s ease-out 0.2s both' }}>
+                                A simple, transparent process designed to turn your idea into content that works.
+                            </p>
+                        </div>
+
+                        {/* Desktop Timeline */}
+                        {window.innerWidth > 768 && (
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '16px' }}>
+                                {[
+                                    { title: 'Discovery Call', desc: 'We start by understanding your business, product, audience, goals, and vision.' },
+                                    { title: 'Strategy & Script', desc: 'We develop the creative direction, concept, messaging, and script for your advertisement.' },
+                                    { title: 'Production', desc: 'Our team transforms the concept into visually engaging AI-powered content.' },
+                                    { title: 'Review & Revise', desc: 'You review the content and share your feedback. We refine until it feels right.' },
+                                    { title: 'Launch & Track', desc: 'Your content goes live, and we help you understand how your creative performs.' }
+                                ].map((step, i) => (
+                                    <div key={i} style={{ flex: 1 }}>
+                                        <div style={{ position: 'relative' }}>
+                                            <div style={{
+                                                width: '48px',
+                                                height: '48px',
+                                                borderRadius: '50%',
+                                                backgroundColor: '#B0B0B0',
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                justifyContent: 'center',
+                                                fontWeight: 'bold',
+                                                margin: '0 auto 16px',
+                                                fontSize: '18px'
+                                            }}>
+                                                {i + 1}
+                                            </div>
+                                            {i < 4 && (
+                                                <div style={{
+                                                    position: 'absolute',
+                                                    top: '24px',
+                                                    left: 'calc(100% - 24px)',
+                                                    width: 'calc(100% + 32px)',
+                                                    height: '2px',
+                                                    background: 'linear-gradient(to right, #B0B0B0, transparent)'
+                                                }}></div>
+                                            )}
+                                        </div>
+                                        <h3 style={{ fontSize: '16px', fontWeight: 'bold', textAlign: 'center', marginBottom: '8px' }}>{step.title}</h3>
+                                        <p style={{ fontSize: '12px', color: '#9ca3af', textAlign: 'center' }}>{step.desc}</p>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+
+                        {/* Mobile Timeline */}
+                        {window.innerWidth <= 768 && (
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
+                                {[
+                                    { title: 'Discovery Call', desc: 'We start by understanding your business, product, audience, goals, and vision.' },
+                                    { title: 'Strategy & Script', desc: 'We develop the creative direction, concept, messaging, and script for your advertisement.' },
+                                    { title: 'Production', desc: 'Our team transforms the concept into visually engaging AI-powered content.' },
+                                    { title: 'Review & Revise', desc: 'You review the content and share your feedback. We refine until it feels right.' },
+                                    { title: 'Launch & Track', desc: 'Your content goes live, and we help you understand how your creative performs.' }
+                                ].map((step, i) => (
+                                    <div key={i} style={{ display: 'flex', gap: '16px' }}>
+                                        <div style={{
+                                            width: '48px',
+                                            height: '48px',
+                                            borderRadius: '50%',
+                                            backgroundColor: '#B0B0B0',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            fontWeight: 'bold',
+                                            flexShrink: 0,
+                                            fontSize: '18px'
+                                        }}>
+                                            {i + 1}
+                                        </div>
+                                        <div>
+                                            <h3 style={{ fontSize: '16px', fontWeight: 'bold', marginBottom: '4px' }}>{step.title}</h3>
+                                            <p style={{ fontSize: '12px', color: '#9ca3af' }}>{step.desc}</p>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+                    </section>
+
+                    {/* Big CTA Section */}
+                    <section style={{ padding: '96px 24px', position: 'relative', overflow: 'hidden' }}>
+                        <div style={{
+                            position: 'absolute',
+                            inset: 0,
+                            background: 'linear-gradient(to right, rgba(176, 176, 176, 0.3), rgba(0, 100, 150, 0.2))',
+                            filter: 'blur(48px)',
+                            zIndex: -1
+                        }}></div>
+
+                        <div style={{ maxWidth: '896px', margin: '0 auto', textAlign: 'center', display: 'flex', flexDirection: 'column', gap: '24px' }}>
+                            <h2 style={{ fontSize: window.innerWidth > 768 ? '56px' : '44px', fontWeight: 'bold', letterSpacing: '-1px', animation: 'slideInUp 0.6s ease-out' }}>
+                                READY TO MAKE YOUR BRAND <span style={{ background: 'linear-gradient(to right, #B0B0B0, #A0A0A0)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>STAND OUT?</span>
+                            </h2>
+
+                            <p style={{ fontSize: '32px', fontWeight: 'bold', animation: 'slideInUp 0.6s ease-out 0.1s both' }}>
+                                Let's Create Something People Remember.
+                            </p>
+
+                            <p style={{ fontSize: '18px', color: '#d1d5db', maxWidth: '672px', margin: '0 auto', animation: 'slideInUp 0.6s ease-out 0.2s both' }}>
+                                Your next advertisement could be more than just a video.
+                                <br />
+                                <span style={{ color: '#B0B0B0', fontWeight: '600' }}>It could be the video people stop scrolling for.</span>
+                            </p>
+
+                            <button
+                                onClick={() => openWhatsApp('Hi AI ADS, I\'m ready to start my project!')}
+                                style={{
+                                    padding: '16px 48px',
+                                    backgroundColor: '#B0B0B0',
+                                    color: 'white',
+                                    border: 'none',
+                                    borderRadius: '8px',
+                                    fontWeight: 'bold',
+                                    fontSize: '16px',
+                                    cursor: 'pointer',
+                                    transition: 'all 0.3s',
+                                    transform: 'scale(1)',
+                                    margin: '0 auto',
+                                    animation: 'slideInUp 0.6s ease-out 0.3s both'
+                                }}
+                                onMouseEnter={(e) => { e.target.style.backgroundColor = '#808080'; e.target.style.transform = 'scale(1.05)'; }}
+                                onMouseLeave={(e) => { e.target.style.backgroundColor = '#B0B0B0'; e.target.style.transform = 'scale(1)'; }}
+                            >
+                                Start Your Project
+                            </button>
+                        </div>
+                    </section>
+
+                    {/* Contact Section */}
+                    <section id="contact" style={{ padding: '80px 24px', maxWidth: '896px', margin: '0 auto' }}>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', marginBottom: '48px', textAlign: 'center' }}>
+                            <p style={{ fontSize: '12px', fontWeight: '600', color: '#B0B0B0', letterSpacing: '1px', animation: 'slideInUp 0.6s ease-out' }}>LET'S WORK TOGETHER</p>
+                            <h2 style={{ fontSize: window.innerWidth > 768 ? '56px' : '44px', fontWeight: 'bold', animation: 'slideInUp 0.6s ease-out 0.1s both' }}>Have a Project in Mind?</h2>
+                            <p style={{ fontSize: '16px', color: '#9ca3af', animation: 'slideInUp 0.6s ease-out 0.2s both' }}>
+                                Whether you're launching a new product, promoting your business, building your brand, or looking for fresh social media content — we'd love to hear from you.
+                            </p>
+                        </div>
+
+                        <form onSubmit={handleFormSubmit} style={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            gap: '24px',
+                            backgroundColor: 'rgba(176, 176, 176, 0.05)',
+                            border: '1px solid rgba(176, 176, 176, 0.2)',
+                            borderRadius: '24px',
+                            padding: '32px',
+                            animation: 'slideInUp 0.6s ease-out 0.3s both'
+                        }}>
+                            <input
+                                type="text"
+                                name="website"
+                                value={formData.website}
+                                onChange={(e) => setFormData({ ...formData, website: e.target.value })}
+                                tabIndex={-1}
+                                autoComplete="off"
+                                aria-hidden="true"
+                                style={{ position: 'absolute', left: '-10000px', top: 'auto', width: '1px', height: '1px', overflow: 'hidden' }}
+                            />
+                            <div style={{ display: 'grid', gridTemplateColumns: window.innerWidth > 768 ? '1fr 1fr' : '1fr', gap: '24px' }}>
+                                <div>
+                                    <label style={{ display: 'block', fontSize: '12px', fontWeight: '600', marginBottom: '12px' }}>Name *</label>
+                                    <input
+                                        type="text"
+                                        required
+                                        placeholder="Enter your name"
+                                        value={formData.name}
+                                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                                        style={{
+                                            width: '100%',
+                                            backgroundColor: '#1A1A1A',
+                                            border: '1px solid rgba(176, 176, 176, 0.3)',
+                                            borderRadius: '8px',
+                                            padding: '12px 16px',
+                                            color: 'white',
+                                            outline: 'none',
+                                            transition: 'border-color 0.3s'
+                                        }}
+                                        onFocus={(e) => e.target.style.borderColor = '#B0B0B0'}
+                                        onBlur={(e) => e.target.style.borderColor = 'rgba(176, 176, 176, 0.3)'}
+                                    />
+                                </div>
+                                <div>
+                                    <label style={{ display: 'block', fontSize: '12px', fontWeight: '600', marginBottom: '12px' }}>Phone / WhatsApp *</label>
+                                    <input
+                                        type="tel"
+                                        required
+                                        placeholder="Enter your number"
+                                        value={formData.phone}
+                                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                                        style={{
+                                            width: '100%',
+                                            backgroundColor: '#1A1A1A',
+                                            border: '1px solid rgba(176, 176, 176, 0.3)',
+                                            borderRadius: '8px',
+                                            padding: '12px 16px',
+                                            color: 'white',
+                                            outline: 'none',
+                                            transition: 'border-color 0.3s'
+                                        }}
+                                        onFocus={(e) => e.target.style.borderColor = '#B0B0B0'}
+                                        onBlur={(e) => e.target.style.borderColor = 'rgba(176, 176, 176, 0.3)'}
+                                    />
+                                </div>
+                            </div>
+
+                            <div>
+                                <label style={{ display: 'block', fontSize: '12px', fontWeight: '600', marginBottom: '12px' }}>Email (Optional)</label>
+                                <input
+                                    type="email"
+                                    placeholder="Enter your email"
+                                    value={formData.email}
+                                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                                    style={{
+                                        width: '100%',
+                                        backgroundColor: '#1A1A1A',
+                                        border: '1px solid rgba(176, 176, 176, 0.3)',
+                                        borderRadius: '8px',
+                                        padding: '12px 16px',
+                                        color: 'white',
+                                        outline: 'none',
+                                        transition: 'border-color 0.3s'
+                                    }}
+                                    onFocus={(e) => e.target.style.borderColor = '#B0B0B0'}
+                                    onBlur={(e) => e.target.style.borderColor = 'rgba(176, 176, 176, 0.3)'}
+                                />
+                            </div>
+
+                            <div>
+                                <label style={{ display: 'block', fontSize: '12px', fontWeight: '600', marginBottom: '12px' }}>Tell us about your project or business *</label>
+                                <textarea
+                                    required
+                                    placeholder="Tell us what you're looking to create..."
+                                    value={formData.project}
+                                    onChange={(e) => setFormData({ ...formData, project: e.target.value })}
+                                    rows="5"
+                                    style={{
+                                        width: '100%',
+                                        backgroundColor: '#1A1A1A',
+                                        border: '1px solid rgba(176, 176, 176, 0.3)',
+                                        borderRadius: '8px',
+                                        padding: '12px 16px',
+                                        color: 'white',
+                                        outline: 'none',
+                                        transition: 'border-color 0.3s',
+                                        fontFamily: 'inherit',
+                                        resize: 'none'
+                                    }}
+                                    onFocus={(e) => e.target.style.borderColor = '#B0B0B0'}
+                                    onBlur={(e) => e.target.style.borderColor = 'rgba(176, 176, 176, 0.3)'}
+                                ></textarea>
+                            </div>
+
+                            {formStatus === 'success' && (
+                                <div style={{
+                                    padding: '16px',
+                                    backgroundColor: 'rgba(34, 197, 94, 0.2)',
+                                    border: '1px solid rgba(34, 197, 94, 0.5)',
+                                    borderRadius: '8px',
+                                    color: '#86efac'
+                                }}>
+                                    ✓ Thank you. Your enquiry is being sent to the AI ADS lead sheet.
+                                </div>
+                            )}
+
+                            {formStatus && formStatus !== 'success' && (
+                                <div style={{
+                                    padding: '16px',
+                                    backgroundColor: 'rgba(176, 176, 176, 0.2)',
+                                    border: '1px solid rgba(176, 176, 176, 0.5)',
+                                    borderRadius: '8px',
+                                    color: '#d8b4fe'
+                                }}>
+                                    {formStatus}
+                                </div>
+                            )}
+
+                            <button
+                                type="submit"
+                                style={{
+                                    width: '100%',
+                                    padding: '12px 24px',
+                                    backgroundColor: '#B0B0B0',
+                                    color: 'white',
+                                    border: 'none',
+                                    borderRadius: '8px',
+                                    fontWeight: 'bold',
+                                    cursor: 'pointer',
+                                    transition: 'background-color 0.3s'
+                                }}
+                                onMouseEnter={(e) => e.target.style.backgroundColor = '#808080'}
+                                onMouseLeave={(e) => e.target.style.backgroundColor = '#B0B0B0'}
+                            >
+                                Send Project Enquiry
+                            </button>
+                            <p style={{ fontSize: '12px', color: '#9ca3af', textAlign: 'center', lineHeight: '1.5', marginTop: '-8px' }}>
+                                Submitting sends your contact and project details to the AI ADS lead sheet for follow-up.
+                            </p>
+                        </form>
+
+                        {/* Direct Contact */}
+                        <div style={{ display: 'grid', gridTemplateColumns: window.innerWidth > 768 ? '1fr 1fr 1fr' : '1fr', gap: '24px', marginTop: '48px', textAlign: 'center' }}>
+                            <div style={{ animation: 'slideInUp 0.6s ease-out 0.3s both' }}>
+                                <p style={{ fontSize: '12px', color: '#9ca3af', marginBottom: '8px' }}>WhatsApp</p>
+                                <button
+                                    onClick={() => openWhatsApp('Hi AI ADS!')}
+                                    style={{
+                                        background: 'none',
+                                        border: 'none',
+                                        fontSize: '16px',
+                                        fontWeight: 'bold',
+                                        color: '#B0B0B0',
+                                        cursor: 'pointer',
+                                        transition: 'color 0.3s'
+                                    }}
+                                    onMouseEnter={(e) => e.target.style.color = '#B0B0B0'}
+                                    onMouseLeave={(e) => e.target.style.color = '#B0B0B0'}
+                                >
+                                    +91 94871 43267
+                                </button>
+                            </div>
+                            <div style={{ animation: 'slideInUp 0.6s ease-out 0.4s both' }}>
+                                <p style={{ fontSize: '12px', color: '#9ca3af', marginBottom: '8px' }}>Email</p>
+                                <a href="mailto:abdulkasim0808@gmail.com" style={{
+                                    fontSize: '16px',
+                                    fontWeight: 'bold',
+                                    color: '#B0B0B0',
+                                    textDecoration: 'none',
+                                    transition: 'color 0.3s'
+                                }}
+                                onMouseEnter={(e) => e.target.style.color = '#B0B0B0'}
+                                onMouseLeave={(e) => e.target.style.color = '#B0B0B0'}
+                                >
+                                    abdulkasim0808@gmail.com
+                                </a>
+                            </div>
+                            <div style={{ animation: 'slideInUp 0.6s ease-out 0.5s both' }}>
+                                <p style={{ fontSize: '12px', color: '#9ca3af', marginBottom: '8px' }}>Instagram</p>
+                                <a href="https://www.instagram.com/ai__advertising?utm_source=ig_web_button_share_sheet&amp;stkn=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer" style={{
+                                    fontSize: '16px',
+                                    fontWeight: 'bold',
+                                    color: '#B0B0B0',
+                                    textDecoration: 'none',
+                                    transition: 'color 0.3s'
+                                }}
+                                onMouseEnter={(e) => e.target.style.color = '#B0B0B0'}
+                                onMouseLeave={(e) => e.target.style.color = '#B0B0B0'}
+                                >
+                                    @ai__advertising
+                                </a>
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* Floating WhatsApp Button */}
+                    <button
+                        onClick={() => openWhatsApp('Hi AI ADS, I\'m interested in creating an advertisement for my business.')}
+                        style={{
+                            position: 'fixed',
+                            bottom: '32px',
+                            right: '32px',
+                            width: '64px',
+                            height: '64px',
+                            backgroundColor: '#10b981',
+                            borderRadius: '50%',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            cursor: 'pointer',
+                            border: 'none',
+                            boxShadow: '0 10px 25px rgba(0, 0, 0, 0.3)',
+                            transition: 'all 0.3s',
+                            animation: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                            zIndex: 40
+                        }}
+                        title="Chat on WhatsApp"
+                        onMouseEnter={(e) => { e.target.style.backgroundColor = '#059669'; e.target.style.transform = 'scale(1.1)'; }}
+                        onMouseLeave={(e) => { e.target.style.backgroundColor = '#10b981'; e.target.style.transform = 'scale(1)'; }}
+                    >
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M16 2C8.27 2 2 8.27 2 16c0 2.46.66 4.81 1.81 6.85L2 30l8.35-2.66C12.19 29.34 14.06 30 16 30c7.73 0 14-6.27 14-14S23.73 2 16 2zm0 25.8c-1.74 0-3.41-.46-4.85-1.27l-.35-.2-3.61 1.15 1.17-3.56-.21-.35C5 21.36 4.3 18.8 4.3 16c0-6.48 5.28-11.8 11.7-11.8 6.42 0 11.7 5.32 11.7 11.8 0 6.48-5.28 11.8-11.7 11.8z" fill="white"/>
+                            <path d="M11 8.5c-.3 0-.78.09-1.19.55-.39.46-.48 1.14-.48 1.14s-.09.67.23 1.47c.33.8 1.71 3.38 3.89 5.45 2.18 2.07 4.58 2.77 5.37 2.92.8.15 1.47-.1 1.93-.46.46-.36.78-.94.88-1.24.1-.3.06-.55.06-.55s-.15-.25-.4-.4c-.25-.15-1.47-.73-1.7-.81-.23-.08-.4-.12-.56.12-.16.24-.62.8-.76.97-.14.17-.28.2-.53.05-.25-.15-1.05-.39-2-1.24-.74-.66-1.24-1.47-1.38-1.72-.14-.25 0-.38.11-.5.1-.1.25-.27.38-.4.12-.14.16-.23.24-.39.08-.16.04-.3-.02-.42-.06-.12-.56-1.35-.77-1.84-.2-.44-.4-.39-.56-.39-.14 0-.3-.01-.47-.01z" fill="white"/>
+                        </svg>
+                    </button>
+
+                    {/* Footer */}
+                    <footer style={{
+                        borderTop: '1px solid rgba(176, 176, 176, 0.1)',
+                        padding: '48px 24px',
+                        maxWidth: '1280px',
+                        margin: '0 auto'
+                    }}>
+                        <div style={{ display: 'grid', gridTemplateColumns: window.innerWidth > 768 ? '1fr 1fr 1fr 1fr' : '1fr', gap: '48px', marginBottom: '48px' }}>
+                            <div>
+                                <h3 style={{ marginBottom: '8px' }}><img src="/manus-storage/logo_b66763fe.jpeg" alt="AI ADS — AI Powered Video Advertisement" width="128" height="128" loading="lazy" style={{ display: 'block', width: '128px', height: '128px', objectFit: 'contain' }} /></h3>
+                                <p style={{ color: '#9ca3af' }}>Your Brand. Reimagined with AI.</p>
+                            </div>
+                            <div>
+                                <p style={{ fontWeight: '600', marginBottom: '12px' }}>Navigation</p>
+                                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', color: '#9ca3af', fontSize: '14px' }}>
+                                    <a href="#services" style={{ color: '#9ca3af', textDecoration: 'none', cursor: 'pointer', transition: 'color 0.3s' }} onMouseEnter={(e) => e.target.style.color = '#B0B0B0'} onMouseLeave={(e) => e.target.style.color = '#9ca3af'}>Services</a>
+                                    <a href="#work" style={{ color: '#9ca3af', textDecoration: 'none', cursor: 'pointer', transition: 'color 0.3s' }} onMouseEnter={(e) => e.target.style.color = '#B0B0B0'} onMouseLeave={(e) => e.target.style.color = '#9ca3af'}>Work</a>
+                                    <a href="#process" style={{ color: '#9ca3af', textDecoration: 'none', cursor: 'pointer', transition: 'color 0.3s' }} onMouseEnter={(e) => e.target.style.color = '#B0B0B0'} onMouseLeave={(e) => e.target.style.color = '#9ca3af'}>Process</a>
+                                    <a href="#contact" style={{ color: '#9ca3af', textDecoration: 'none', cursor: 'pointer', transition: 'color 0.3s' }} onMouseEnter={(e) => e.target.style.color = '#B0B0B0'} onMouseLeave={(e) => e.target.style.color = '#9ca3af'}>Contact</a>
+                                </div>
+                            </div>
+                            <div>
+                                <p style={{ fontWeight: '600', marginBottom: '12px' }}>Contact</p>
+                                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', color: '#9ca3af', fontSize: '12px' }}>
+                                    <button onClick={() => openWhatsApp('Hi')} style={{ background: 'none', border: 'none', color: '#9ca3af', cursor: 'pointer', textAlign: 'left', transition: 'color 0.3s' }} onMouseEnter={(e) => e.target.style.color = '#B0B0B0'} onMouseLeave={(e) => e.target.style.color = '#9ca3af'}>+91 94871 43267</button>
+                                    <a href="mailto:abdulkasim0808@gmail.com" style={{ color: '#9ca3af', textDecoration: 'none', transition: 'color 0.3s' }} onMouseEnter={(e) => e.target.style.color = '#B0B0B0'} onMouseLeave={(e) => e.target.style.color = '#9ca3af'}>abdulkasim0808@gmail.com</a>
+                                </div>
+                            </div>
+                            <div>
+                                <p style={{ fontWeight: '600', marginBottom: '12px' }}>Follow</p>
+                                <a href="https://www.instagram.com/ai__advertising?utm_source=ig_web_button_share_sheet&amp;stkn=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer" style={{
+                                    color: '#9ca3af',
+                                    textDecoration: 'none',
+                                    cursor: 'pointer',
+                                    transition: 'color 0.3s'
+                                }}
+                                onMouseEnter={(e) => e.target.style.color = '#B0B0B0'}
+                                onMouseLeave={(e) => e.target.style.color = '#9ca3af'}
+                                >
+                                    @ai__advertising
+                                </a>
+                            </div>
+                        </div>
+
+                        <div style={{ borderTop: '1px solid rgba(176, 176, 176, 0.1)', paddingTop: '32px' }}>
+                            <p style={{ color: '#6b7280', fontSize: '12px', textAlign: 'center', marginBottom: '12px' }}>
+                                AI Video Advertisements • Brand Campaigns • Product Showcases • Social Content
+                            </p>
+                            <p style={{ color: '#4b5563', textAlign: 'center', fontWeight: '600' }}>
+                                Let's create something worth watching.
+                            </p>
+                        </div>
+                    </footer>
+                </div>
+            );
+        };
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<AIADSWebsite />);
+    </script>
+</body>
+</html>
